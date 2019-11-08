@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:openote/model/document.dart';
 import 'package:openote/model/documenttype.dart';
 import 'package:openote/ui/search_bar.dart';
+import 'package:unicorndial/unicorndial.dart';
 import 'package:uuid/uuid.dart';
 
 class LandingPage extends StatelessWidget {
@@ -13,26 +14,46 @@ class LandingPage extends StatelessWidget {
         child: Column(
           children: getDocumentsWidget(),
         )
-      )
+      ),
+      floatingActionButton: UnicornDialer(
+        parentButtonBackground: Colors.green,
+        orientation: UnicornOrientation.VERTICAL,
+        parentButton: Icon(Icons.edit),
+        childButtons: _getUnicornButtons(),
+      ),
     );
   }
 }
 
-class DocumentDirectory extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-          child: Column(
-            children: getDocumentsWidget()
-          )
-        )
-      ],
-    );
-  }
+List<UnicornButton> _getUnicornButtons() {
+  List<UnicornButton> buttons = List();
+  buttons.add(
+    UnicornButton(
+      hasLabel: true,
+      labelText: "New Note",
+      currentButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        child: Icon(Icons.event_note),
+        mini: true,
+        onPressed: () {},
+      ),
+    )
+  );
 
+  buttons.add(
+    UnicornButton(
+      hasLabel: true,
+      labelText: "New Checklist",
+      currentButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        child: Icon(Icons.check_box),
+        mini: true,
+        onPressed: () {},
+      ),
+    )
+  );
+
+  return buttons;
 }
 
 List<Document> getDocuments() {

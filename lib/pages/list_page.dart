@@ -11,7 +11,12 @@ class ListPage extends StatelessWidget {
         child: Column(
           children: getListTiles(),
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
+      ),
     );
   }
 }
@@ -56,9 +61,7 @@ List<CheckboxListTile> getListTiles() {
       CheckboxListTile(
         title: Text("list $i"),
         value: (i % 2 == 0),
-        onChanged: (bool isChecked) {
-
-        }
+        onChanged: (bool isChecked) {}
       )
     );
   }
