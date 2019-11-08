@@ -6,13 +6,14 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getLandingBar(),
+      appBar: getLandingBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: getListTiles(),
         )
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "newListItemBtn",
         onPressed: () {},
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
@@ -21,10 +22,12 @@ class ListPage extends StatelessWidget {
   }
 }
 
-AppBar getLandingBar() {
+AppBar getLandingBar(context) {
   return AppBar(
     backgroundColor: Colors.green,
-    leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () {},),
+    leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () {
+      Navigator.pop(context);
+    }),
     title: Container(
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 7.0),
         decoration: BoxDecoration(

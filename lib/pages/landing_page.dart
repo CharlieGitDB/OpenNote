@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:openote/model/document.dart';
 import 'package:openote/model/documenttype.dart';
+import 'package:openote/pages/editor_page.dart';
+import 'package:openote/pages/list_page.dart';
 import 'package:openote/ui/search_bar.dart';
 import 'package:unicorndial/unicorndial.dart';
 import 'package:uuid/uuid.dart';
@@ -12,30 +14,36 @@ class LandingPage extends StatelessWidget {
       appBar: getSearchBar(),
       body: SingleChildScrollView(
         child: Column(
-          children: getDocumentsWidget(),
+          children: getDocumentsWidget(context),
         )
       ),
       floatingActionButton: UnicornDialer(
         parentButtonBackground: Colors.green,
         orientation: UnicornOrientation.VERTICAL,
         parentButton: Icon(Icons.edit),
-        childButtons: _getUnicornButtons(),
+        childButtons: _getUnicornButtons(context),
       ),
     );
   }
 }
 
-List<UnicornButton> _getUnicornButtons() {
+List<UnicornButton> _getUnicornButtons(context) {
   List<UnicornButton> buttons = List();
   buttons.add(
     UnicornButton(
       hasLabel: true,
       labelText: "New Note",
       currentButton: FloatingActionButton(
+        heroTag: "newDocumentBtn",
         backgroundColor: Colors.green,
         child: Icon(Icons.event_note),
         mini: true,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EditorPage()),
+            );
+        },
       ),
     )
   );
@@ -48,7 +56,12 @@ List<UnicornButton> _getUnicornButtons() {
         backgroundColor: Colors.green,
         child: Icon(Icons.check_box),
         mini: true,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ListPage()),
+            );
+        },
       ),
     )
   );
@@ -66,21 +79,30 @@ List<Document> getDocuments() {
   return di;
 }
 
-List<Widget> getDocumentsWidget() {
+List<Widget> getDocumentsWidget(context) {
   List<Widget> widgets = List();
   List<Document> docs = getDocuments();
   docs.forEach((d) => {
-    widgets.add(Card(
-     child: Column(
-       mainAxisSize: MainAxisSize.min,
-       children: <Widget>[
-          ListTile(
-            leading: (d.type == DocumentType.list ? Icon(Icons.event_note) : Icon(Icons.check_box)),
-            title: Text(d.name),
-            subtitle: Text(d.date)
-          ),
-       ],
-     ) 
+    widgets.add(
+      InkWell(
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+                ListTile(
+                  leading: (d.type == DocumentType.list ? Icon(Icons.check_box) : Icon(Icons.event_note)),
+                  title: Text(d.name),
+                  subtitle: Text(d.date)
+                ),
+            ],
+          ), 
+        ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => d.type == DocumentType.list ? ListPage() : EditorPage()),
+            );
+        },
     ))
   });
 
