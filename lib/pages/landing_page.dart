@@ -41,6 +41,7 @@ List<Document> getDocuments() {
     DocumentType dt = (i % 2 == 0 ? DocumentType.list : DocumentType.note);
     di.add(Document(Uuid().v4().toString(), i.toString(), dt, "date"));
   }
+  
   return di;
 }
 
@@ -48,17 +49,6 @@ List<Widget> getDocumentsWidget() {
   List<Widget> widgets = List();
   List<Document> docs = getDocuments();
   docs.forEach((d) => {
-    // widgets.add(Row(
-    //   children: <Widget>[
-    //     Expanded(
-    //       child: Text(d.name)
-    //     ),
-    //     Expanded(
-    //       child: Text(d.date)
-    //     )
-    //   ],
-    // ))
-
     widgets.add(Card(
      child: Column(
        mainAxisSize: MainAxisSize.min,
