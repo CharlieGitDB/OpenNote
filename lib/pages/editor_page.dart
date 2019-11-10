@@ -28,14 +28,25 @@ class EditorPageState extends State<EditorPage> {
     // Note that the editor requires special `ZefyrScaffold` widget to be
     // one of its parents.
     return Scaffold(
-      appBar: AppBar(title: Text("Editor page")),
-      body: ZefyrScaffold(
-        child: ZefyrEditor(
-          padding: EdgeInsets.all(16),
-          controller: _controller,
-          focusNode: _focusNode,
-        ),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text("Editor page")
       ),
+      body: ZefyrScaffold(
+        child: ZefyrTheme(
+          data: new ZefyrThemeData(
+              cursorColor: Colors.green,
+              toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
+              color: Colors.green
+             )
+          ),
+          child: ZefyrEditor(
+            padding: EdgeInsets.all(16),
+            controller: _controller,
+            focusNode: _focusNode,
+          )
+        )
+      )
     );
   }
 

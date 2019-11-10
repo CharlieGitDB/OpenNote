@@ -64,6 +64,7 @@ List<CheckboxListTile> getListTiles() {
       CheckboxListTile(
         title: Text("list $i"),
         value: (i % 2 == 0),
+        activeColor: Colors.green,
         onChanged: (bool isChecked) {}
       )
     );
