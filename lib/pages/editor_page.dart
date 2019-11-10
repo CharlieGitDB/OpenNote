@@ -35,10 +35,11 @@ class EditorPageState extends State<EditorPage> {
       body: ZefyrScaffold(
         child: ZefyrTheme(
           data: new ZefyrThemeData(
-              cursorColor: Colors.green,
-              toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
-              color: Colors.green
-             )
+            cursorColor: Colors.green,
+            toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
+              color: Colors.green[300],
+              toggleColor: Colors.green
+            )
           ),
           child: ZefyrEditor(
             padding: EdgeInsets.all(16),

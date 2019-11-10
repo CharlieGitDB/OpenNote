@@ -58,6 +58,7 @@ AppBar getSearchBar() {
                     hintStyle: TextStyle(color: Colors.white),
                     icon: Icon(Icons.search, color: Colors.white)
                   ),
+                  style: TextStyle(color: Colors.white),
                 ),
               )
             ),

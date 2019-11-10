@@ -11,13 +11,7 @@ class ListPage extends StatelessWidget {
         child: Column(
           children: getListTiles(),
         )
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: "newListItemBtn",
-        onPressed: () {},
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green,
-      ),
+      )
     );
   }
 }
@@ -29,7 +23,7 @@ AppBar getLandingBar(context) {
       Navigator.pop(context);
     }),
     title: Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 7.0),
+      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 7.0),
         decoration: BoxDecoration(
           color: Colors.green[200],
           borderRadius: BorderRadius.all(Radius.circular(22.0))
@@ -40,17 +34,24 @@ AppBar getLandingBar(context) {
             Expanded(
               flex: 1,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextFormField(
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: "Search..",
+                    hintText: "Type new item..",
                     hintStyle: TextStyle(color: Colors.white),
-                    icon: Icon(Icons.search, color: Colors.white)
                   ),
+                  style: TextStyle(color: Colors.white),
                 ),
               )
             ),
+            Expanded(
+              flex: 0,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.add)
+              )
+            )
           ],
         )
     )
